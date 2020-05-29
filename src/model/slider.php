@@ -7,11 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Slider extends Model
 {
     protected $table = 'bgr_slider';
-    protected $appends = ['img'];
+    protected $appends = ['img','data_caption'];
 
     public function getImgAttribute()
     {
           return url('slider/'.$this->gambar);
+    }      
+    public function getDataCaptionAttribute()
+    {
+          if($this->caption != null){
+             return $this->caption;
+          }else{
+             return '-';
+          }
     }   
     public function scopeDatatable($query,$request,$page=12)
     {
