@@ -11,7 +11,7 @@ class Slider extends Model
 
     public function getImgAttribute()
     {
-          return url('slider/'.$this->gambar);
+          return url('storage/slider/'.$this->gambar);
     }      
     public function getDataCaptionAttribute()
     {
