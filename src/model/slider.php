@@ -11,8 +11,8 @@ class Slider extends Model
 
     public function getImgAttribute()
     {
-          return url('storage/slider/'.$this->gambar);
-    }      
+          return \Storage::url('slider/'.$this->gambar);
+    }
     public function getDataCaptionAttribute()
     {
           if($this->caption != null){
@@ -20,7 +20,7 @@ class Slider extends Model
           }else{
              return '-';
           }
-    }   
+    }
     public function scopeDatatable($query,$request,$page=12)
     {
           $search       = ["id",'caption'];
@@ -33,7 +33,7 @@ class Slider extends Model
             }else{
                 $searchqry .= "OR lower($value) like '%".strtolower($request->search)."%'";
             }
-        } 
+        }
         $searchqry .= ")";
         if(@$request->sort_by){
             if(@$request->sort_by != null){
