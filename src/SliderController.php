@@ -32,10 +32,11 @@ class SliderController extends Controller
         }else{
             $slider              		= new slider;
             $slider->caption	        = $request->caption;
+            $slider->link_url	        = $request->link_url;
             $upload                     = UploadProcessor::go($request->file('gambar'),'slider');
             $slider->gambar             = $upload;
             $slider->save();
-            return response(['status' => true ,'text'    => 'has input'], 200); 
+            return response(['status' => true ,'text'    => 'has input'], 200);
         }
     }
 
@@ -62,7 +63,7 @@ class SliderController extends Controller
         $rules      = [];
         if($request->file('gambar') != null){
             $rules['gambar'] = 'mimes:jpg,jpeg,png|max:2000';
-        }  
+        }
         $messages   = [];
         $attributes = [];
 
@@ -73,12 +74,13 @@ class SliderController extends Controller
         }else{
             $slider                     = slider::findOrFail($id);
             $slider->caption            = $request->caption;
+            $slider->link_url            = $request->link_url;
             if($request->file('gambar') != null){
                 $upload                     = UploadProcessor::go($request->file('gambar'),'slider');
                 $slider->gambar             = $upload;
             }
             $slider->save();
-            return response(['status' => true ,'text'    => 'has input'], 200); 
+            return response(['status' => true ,'text'    => 'has input'], 200);
         }
     }
 
@@ -92,7 +94,7 @@ class SliderController extends Controller
     {
           $delete = slider::findOrFail($id);
           $delete->delete();
-          return response(['status' => true ,'text'    => 'has deleted'], 200); 
+          return response(['status' => true ,'text'    => 'has deleted'], 200);
     }
 
 }
