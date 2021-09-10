@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Bageur\Slider\model\slider;
-use Bageur\Slider\Processors\UploadProcessor;
+use Bageur\Slider\processors\UploadProcessor;
 use Validator;
 class SliderController extends Controller
 {
