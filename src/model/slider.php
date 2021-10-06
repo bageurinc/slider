@@ -11,7 +11,9 @@ class Slider extends Model
 
     public function getImgAttribute()
     {
-          return \Storage::url('slider/'.$this->gambar);
+        //   return \Storage::url('slider/'.$this->gambar);
+        return \Bageur::avatar(@$this->caption, @$this->gambar, 'slider');
+
     }
     public function getDataCaptionAttribute()
     {
