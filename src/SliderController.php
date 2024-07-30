@@ -19,7 +19,7 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $rules    	= [
-                        'gambar'                => 'required|mimes:jpg,jpeg,png|max:2000',
+                        'gambar'                => 'required',
                     ];
 
         $messages 	= [];
@@ -33,8 +33,8 @@ class SliderController extends Controller
             $slider              		= new slider;
             $slider->caption	        = $request->caption;
             $slider->link_url	        = $request->link_url;
-            $upload                     = UploadProcessor::go($request->file('gambar'),'slider');
-            $slider->gambar             = $upload;
+            // $upload                     = UploadProcessor::go($request->file('gambar'),'slider');
+            $slider->gambar             = $request->gambar;
             $slider->save();
             return response(['status' => true ,'text'    => 'has input'], 200);
         }
@@ -61,9 +61,9 @@ class SliderController extends Controller
     public function update(Request $request, $id)
     {
         $rules      = [];
-        if($request->file('gambar') != null){
-            $rules['gambar'] = 'mimes:jpg,jpeg,png|max:2000';
-        }
+        // if($request->file('gambar') != null){
+            // $rules['gambar'] = 'mimes:jpg,jpeg,png|max:2000';
+        // }
         $messages   = [];
         $attributes = [];
 
@@ -74,11 +74,8 @@ class SliderController extends Controller
         }else{
             $slider                     = slider::findOrFail($id);
             $slider->caption            = $request->caption;
-            $slider->link_url            = $request->link_url;
-            if($request->file('gambar') != null){
-                $upload                     = UploadProcessor::go($request->file('gambar'),'slider');
-                $slider->gambar             = $upload;
-            }
+            $slider->link_url           = $request->link_url;
+            $slider->gambar             = $request->gambar;
             $slider->save();
             return response(['status' => true ,'text'    => 'has input'], 200);
         }
